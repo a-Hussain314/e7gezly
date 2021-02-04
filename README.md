@@ -1,1 +1,1 @@
-# e7gezly
+template project with redux, thunk, actions and reducers
