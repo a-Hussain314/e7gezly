@@ -8,7 +8,7 @@ function Home() {
         <Layout>
                 <section className="home_hero">
                     <div className="container">    
-                        <h3>Hero Section</h3>
+                        <h3>- Hero Section</h3>
                     </div>
                 </section>
                 <section className="news">
