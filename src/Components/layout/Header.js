@@ -5,10 +5,10 @@ import {Link} from 'react-router-dom';
 
 function Header(props)  {
     useEffect(()=>{
-        if(window.localStorage.getItem("userData")){
+        if(window.localStorage.getItem("userData") && props.appState.userData === null){
             props.AppStatehandler({userData :JSON.parse(window.localStorage.getItem("userData"))})
         }
-    },[])
+    })
 
     const signOut = ()=>{
         window.localStorage.removeItem("userData");

@@ -65,7 +65,7 @@ function SignIn(props) {
                     <form onSubmit={formSubmitHandler}>
                         <input id="phoneNumber" type="phone"    required onChange={updateFormInfo} value={formInfo.phoneNumber} placeholder="Phone Number"/>
                         <input id="password"    type="password" required onChange={updateFormInfo} value={formInfo.password}    placeholder="Password"/>
-                        <input id="submit"      type="submit"   value="Sign Up"/>
+                        <input id="submit"      type="submit"   value="Sign in"/>
                     </form>
                     <div>
                         {errors.map((err, index)=>{
