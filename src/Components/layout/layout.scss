@@ -30,6 +30,20 @@ header{
         text-transform: uppercase;
         margin: auto 10px;
     }
+    .userBox{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        .userAvatar{
+            width: 40px;
+            border-radius: 50%;
+            margin: 0 10px 0 0;
+        }
+        .signOut{
+            margin: 0 0 0 40px;
+            cursor: pointer;
+        }
+    }
     
 }
 

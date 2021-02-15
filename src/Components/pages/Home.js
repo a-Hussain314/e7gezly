@@ -3,9 +3,9 @@ import Layout from "../layout/Layout"
 import "./Home.scss";
 
 
-function Home() {
+function Home(props) {
     return (
-        <Layout>
+        <Layout title="Home | E7gezly" {...props}>
                 <section className="home_hero">
                     <div className="container">    
                         <h3>- Hero Section</h3>
