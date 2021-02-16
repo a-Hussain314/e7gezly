@@ -1,14 +1,12 @@
 import React, { useState , useEffect} from 'react';
-import Layout from '../layout/Layout';
-import axios from "axios";
-import qs from "qs";
+import Requester from "../../utilities/Requester";
 import History from "../../utilities/History";
 import "./SignUp.scss";
 
 function SignUp(props) {
     useEffect(()=>{
         if(!!props.appState.userData){
-            console.log(props.appState.userData)
+            // console.log(props.appState.userData)
             History.push("/")
         }
     },[props.appState.userData])
@@ -33,32 +31,14 @@ function SignUp(props) {
     const formSubmitHandler = (e)=>{
         e.preventDefault();
         // console.log(formInfo);
-    
-        var data = qs.stringify({
-        'firstName': formInfo.firstName,
-        'lastName': formInfo.lastName,
-        'phoneNumber': formInfo.phoneNumber,
-        'password': formInfo.password,
-        'nationalID': formInfo.nationalID,
-        'email': formInfo.email 
-        });
 
-        var config = {
-          method: 'post',
-          url: 'https://e7gzly.herokuapp.com/auth/register',
-          headers: { 
-            'Content-Type': 'application/x-www-form-urlencoded'
-          },
-          data : data
-        };
-        
-        axios(config)
+        Requester.post("/auth/register", formInfo)
         .then(function(response) {
-          setErrors([])
+            setErrors([])
         //   console.log(response.data);
-          props.AppStatehandler({userData :response.data.userData});
-          window.localStorage.setItem("userData", JSON.stringify(response.data.userData))
-          History.push("/")
+            props.AppStatehandler({userData :response.data.userData});
+            window.localStorage.setItem("userData", JSON.stringify(response.data.userData))
+            History.push("/")
         })
         .catch(function(error) {
             if(error.response){
@@ -84,7 +64,7 @@ function SignUp(props) {
 
     
     return (
-        <Layout title="Sign up | E7gezly" {...props}>
+        <>
             <div className="container">
                 <div className="SignUp_page">
                     <form onSubmit={formSubmitHandler}>
@@ -104,7 +84,7 @@ function SignUp(props) {
                    
                 </div>
             </div>
-        </Layout>
+        </>
     )
 }
 

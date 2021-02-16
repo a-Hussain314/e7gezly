@@ -1,14 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import Layout from '../layout/Layout';
-import axios from "axios";
-import qs from "qs";
+import Requester from "../../utilities/Requester";
 import History from "../../utilities/History";
 import "./SignUp.scss";
 
 function SignIn(props) {
     useEffect(()=>{
         if(!!props.appState.userData){
-            console.log(props.appState.userData)
+            // console.log(props.appState.userData)
             History.push("/")
         }
     },[props.appState.userData])
@@ -28,23 +26,8 @@ function SignIn(props) {
 
     const formSubmitHandler = (e)=>{
         e.preventDefault();
-        // console.log(formInfo);
-    
-        var data = qs.stringify({
-        'phoneNumber': formInfo.phoneNumber,
-        'password': formInfo.password,
-        });
-
-        var config = {
-          method: 'post',
-          url: 'https://e7gzly.herokuapp.com/auth/login',
-          headers: { 
-            'Content-Type': 'application/x-www-form-urlencoded'
-          },
-          data : data
-        };
-        
-        axios(config)
+        console.log(formInfo);
+        Requester.post("/auth/login", formInfo)
         .then(function(response) {
           setErrors([])
           console.log(response);
@@ -59,7 +42,7 @@ function SignIn(props) {
 
     
     return (
-        <Layout title="Sign up | E7gezly" {...props}>
+        <>
             <div className="container">
                 <div className="SignUp_page">
                     <form onSubmit={formSubmitHandler}>
@@ -75,7 +58,7 @@ function SignIn(props) {
                    
                 </div>
             </div>
-        </Layout>
+        </>
     )
 }
 
