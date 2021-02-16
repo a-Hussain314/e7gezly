@@ -39,6 +39,11 @@ header{
             border-radius: 50%;
             margin: 0 10px 0 0;
         }
+
+        p{
+            text-transform: capitalize;
+        }
+        
         .signOut{
             margin: 0 0 0 40px;
             cursor: pointer;
@@ -52,7 +57,5 @@ p{
     text-align: center;
 }}
 
-.appMain{
-    min-height: calc(100vh - 140px);
-}
+
 
