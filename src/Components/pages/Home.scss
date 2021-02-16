@@ -1,15 +1,49 @@
 @import "../styles//reuseable.scss";
 
 .home_hero{
-    min-height: 45vh;
-    background-color: $offWhite;
+    .hero_container{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        h3{
+            text-align: center;
+            color: $primary;
+            width: 50%;
+        }
+        img{
+            width: 50%;
+        }
+    }
+    
 }
 
 .news{
-    height: 500px;
+    padding: 25px 0px;
+    background-color: $offWhite;
+    h3{
+        margin-top: 0px;
+    }
+    h4{
+        color: $primary;
+        margin-bottom: 0px;
+        text-transform: capitalize;
+    }
+    p{
+        margin: 0px;
+    }
 }
 
 .covid{
-    height: 500px;
-    background-color: $offWhite;
+    padding: 50px 0px;
+    h3{
+        margin-top: 0px;
+    }
+    h4{
+        color: $primary;
+        margin-bottom: 0px;
+        text-transform: capitalize;
+    }
+    p{
+        margin: 0px;
+    }
 }

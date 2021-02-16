@@ -1,0 +1,17 @@
+body{
+    min-width: 991px;
+}
+.container{
+    width: 1280px;
+    margin: 0% auto;
+    overflow: hidden;
+    @media (max-width:1400px) {
+        width: 96%;
+        margin: 0px 2%;
+    }
+}
+
+.appMain{
+    min-height: calc(100vh - 140px);
+}
+
