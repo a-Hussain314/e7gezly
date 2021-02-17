@@ -5,7 +5,7 @@ import "./SignUp.scss";
 
 function SignUp(props) {
     useEffect(()=>{
-        if(!!props.appState.userData){
+        if(window.localStorage.getItem("userData") || !!props.appState.userData ){
             // console.log(props.appState.userData)
             History.push("/")
         }
@@ -74,7 +74,7 @@ function SignUp(props) {
                         <input id="password"    type="password" required onChange={updateFormInfo} value={formInfo.password}    placeholder="Password"/>
                         <input id="nationalID"  type="id"       required onChange={updateFormInfo} value={formInfo.nationalID} placeholder="National Id"/>
                         <input id="email"       type="email"    required onChange={updateFormInfo} value={formInfo.email} placeholder="Email Address"/>
-                        <input id="submit"      type="submit"   value="Sign Up"/>
+                        <button id="submit"      type="submit"   className="btn1">Sign Up</button>
                     </form>
                     <div>
                         {errors.map((err, index)=>{
