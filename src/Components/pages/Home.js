@@ -41,7 +41,7 @@ function Home(props) {
                     </div>
                 </section>
                 
-                <section className="news">
+                {!!news.length && <section className="news">
                     <div className="container">    
                         <h3>Latest News</h3>
                         {news.map((topic, index)=>{
@@ -52,9 +52,9 @@ function Home(props) {
                             </div>)
                         })}
                     </div>
-                </section>
+                </section>}
 
-                <section className="covid">
+                {!!advices.length && <section className="covid">
                     <div className="container">    
                         <h3>Covid-19 advices : </h3>
                         {advices.map((advice, index)=>{
@@ -65,7 +65,7 @@ function Home(props) {
                             </div>)
                         })}
                     </div>
-                </section>
+                </section>}
         </>
     )
 }
