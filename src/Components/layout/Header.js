@@ -23,7 +23,8 @@ function Header(props)  {
                 {props.appState.userData ? 
                     <div className="userBox">
                         <img className="userAvatar" src={`https://dummyimage.com/100x100/fff/343996.png&text=+${props.appState.userData.firstName[0].toUpperCase()}+${props.appState.userData.lastName[0].toUpperCase()}+`} alt="username letters"/>
-                        <p>{props.appState.userData.firstName} {props.appState.userData.lastName}</p>
+                        <Link to="/">{props.appState.userData.firstName} {props.appState.userData.lastName}</Link>
+                        <Link to="/Booking">Appoinments</Link>
                         <span className="signOut" onClick={signOut}>Sign out</span>
                     </div>
                 :

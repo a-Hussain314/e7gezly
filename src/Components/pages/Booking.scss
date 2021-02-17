@@ -1,0 +1,62 @@
+@import "../styles//reuseable.scss";
+
+.Booking{
+    padding: 50px 0px;
+  .booking_container{
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      .leftTable{
+        width: 25%;
+        background-color: $offWhite;
+        ul{
+          li{
+            cursor: pointer;
+            &:hover{
+              color: $primary;
+            }
+          }
+        }
+      }
+      .rightTable{
+        width: 75%;
+        padding: 0 0 0 50px;
+        form{
+            display: flex;
+            justify-content: flex-start;
+            align-items: flex-start;
+            flex-direction: column;
+            label{
+                text-transform: capitalize;
+                color: $primary;
+                font-weight: bold;
+            }
+            input, select {
+                width: 50%;
+                padding: 12px 20px;
+                margin: 2px 0;
+                display: inline-block;
+                border: 1px solid $grey;
+                background-color: $offWhite;
+                border-radius: 4px;
+                box-sizing: border-box;
+                text-transform: capitalize;
+              }
+              option{
+                  padding: 10px;
+              }
+              
+              
+        }
+
+        .appointment{
+          border: 1px solid $grey;
+          padding: 10px;
+          margin: 10px 0px;
+          ul{
+          }
+        }
+        
+      }
+  }
+}

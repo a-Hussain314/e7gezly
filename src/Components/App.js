@@ -7,6 +7,7 @@ import SignIn from "./pages/SignIn";
 import Header from "../Components/layout/Header";
 import Footer from "../Components/layout/Footer";
 import Home from  "./pages/Home";
+import Booking from "./pages/Booking";
 
 import "./styles/global.scss";
 import "./layout/layout.scss";
@@ -49,6 +50,13 @@ function App() {
                         render={()=><SignUp appState={appState} 
                         AppStatehandler={AppStatehandler}/>}
                     />
+
+                    <Route
+                        path="/Booking" 
+                        exact 
+                        render={()=><Booking appState={appState} 
+                        AppStatehandler={AppStatehandler}/>}
+                    />          
 
                 </main>
                 <Footer appState={appState} AppStatehandler={AppStatehandler} />
