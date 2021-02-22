@@ -43,7 +43,8 @@ function Booking(props) {
             // fetch and store all hospital Specilizations in a state.
             Requester.get("/specialization/allSpecilizations")
             .then((response)=>{
-                console.log("all specializations", response.data)
+                console.log("all specializations")
+                console.table(response.data)
                 setSpicializations(response.data)
             })
             .catch((error)=>{
@@ -53,7 +54,8 @@ function Booking(props) {
             // fetch and store all hospital Doctors in a state.
              Requester.get("/doctor/allDoctors")
             .then((response)=>{
-                console.log("all doctors", response.data)
+                console.log("all doctors")
+                console.table(response.data)
                 setDoctors(response.data)
             })
             .catch((error)=>{
@@ -164,7 +166,8 @@ function Booking(props) {
             
             Requester.get(booingsUrl)
             .then((response)=>{
-                console.log("all bookings", response.data)
+                console.log("all bookings")
+                console.table(response.data)
                 setBookings(response.data)
             })
             .catch((error)=>{
@@ -175,7 +178,8 @@ function Booking(props) {
             Requester.get("/bookings/allBooking")
             .then((response)=>{
                 let doctorBookings = response.data.filter(booking=>booking.doctorData.email === JSON.parse(window.localStorage.getItem("userData")).email );
-                console.log("doctor bookings", doctorBookings )
+                console.log("doctor bookings")
+                console.table(doctorBookings)
                 setBookings(doctorBookings)
             })
             .catch((error)=>{
