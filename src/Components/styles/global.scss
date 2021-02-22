@@ -16,6 +16,10 @@ body{
     min-height: calc(100vh - 140px);
 }
 
+.Title{
+  color: $primary;
+}
+
 .btn1 {
     background-color: $primary;
     color: white;

@@ -49,13 +49,21 @@
               
         }
 
+        .Title{
+          color: $primary;
+        }
+
         .appointment{
           border: 1px solid $grey;
           padding: 10px 20px;
           margin: 10px 0px;
           border-radius: 5px;
           ul{
+            
           }
+        }
+        .no_appointment{
+          opacity: 0.5;
         }
         
       }
