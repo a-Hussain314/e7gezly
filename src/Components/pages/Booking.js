@@ -80,7 +80,25 @@ function Booking(props) {
 
    const specialitySelectHandler = (e)=>{
     console.log(e.target.value);
-    setDoctorsList(doctors.filter(doctor=>doctor.specializationId === e.target.value))
+    let datesList = [];
+    doctors.filter(doctor=>doctor.specializationId === e.target.value).forEach((doctor)=>{
+        doctor.availableDays.forEach((availableDay, idx)=>{
+            if(!!parseInt(availableDay)){
+                datesList.push({
+                    value : {
+                        doctorId:doctor._id,
+                        userId: props.appState.userData._id,
+                        bookingDay:idx,
+                        specializationId:doctor.specializationId,
+                        bookingType: type
+                    },
+                    text : `${doctor.name} - ${weekDays[idx]} - From ${doctor.startTime}:00 To ${doctor.endTime}:00`
+                })
+            }
+        })
+    })
+    console.log(datesList) 
+    setDoctorsList(datesList)
    }
 
    const doctorSelectHandler = (e)=>{
@@ -156,30 +174,11 @@ function Booking(props) {
                                 <label htmlFor="doctor" >select doctor</label>
                                 <select id="doctor" onChange={doctorSelectHandler}>
                                 <option  defaultValue value=""> -- select an option -- </option>
-                                    {doctorsList.map(function(doctor, index){
+                                    {doctorsList.map((doctor, index)=>{
                                         return(
-                                        <React.Fragment key={index}>
-                                            {doctor.availableDays.map((day, idx)=>{
-                                                    if(!!parseInt(day)){
-                                                        return(
-                                                            <option 
-                                                             key={`${index} - ${idx}`} 
-                                                             value={JSON.stringify({
-                                                                 doctorId:doctor._id,
-                                                                 userId: props.appState.userData._id,
-                                                                 bookingDay:index,
-                                                                 specializationId:doctor.specializationId,
-                                                                 bookingType: type,
-                                                                })}
-                                                            >
-                                                                {doctor.name} - {weekDays[idx]} - From {doctor.startTime}:00 To {doctor.endTime}:00 
-                                                            </option>
-                                                        )
-                                                    }
-                                                })
-                                            }
-                                            </React.Fragment>
+                                            <option key={index} value={JSON.stringify(doctor.value)}>{doctor.text}</option>
                                         )
+                            
                                     })}
                                 </select>
                                 
@@ -191,11 +190,11 @@ function Booking(props) {
                             {view==="list" &&
                             <>
                              <h2>Appointments List</h2>
-                             {bookings.map((booking, index)=>{
+                             {bookings.reverse().map((booking, index)=>{
                                  return(
                                     <div key={index} className="appointment">
                                         <ul style={{
-                                            color : booking.currentNumberInQeue > 0 ? "green" : "grey" 
+                                            color : booking.currentNumberInQeue > 0 ? "#47b70d" : "#bbbbbb" 
                                             }}>
                                             <li>{`Name : ${booking.userData.firstName} ${booking.userData.lastName}`}</li>
                                             <li>{`Dr : ${booking.doctorData.name}`}</li>
@@ -204,7 +203,7 @@ function Booking(props) {
                                             <li>{`Queue length : ${booking.totalNumberInQeue}`}</li>
                                             <li>{`Your number in Queue : ${booking.numberInQeue}`}</li>
                                             <li>{`Current in Queue: ${booking.currentNumberInQeue}`}</li>
-                                            <li>{`Queue status: ${booking.currentNumberInQeue > 0 ? "The Queue Started" : "The Queue Did not Started Yet"}`}</li>
+                                            <li>{`Queue status: ${booking.currentNumberInQeue > 0 ? "The Queue Started" : "The Queue Did not Start Yet"}`}</li>
                                         </ul>
                                             <button className="btn2">Cancel</button>
                                     </div>
