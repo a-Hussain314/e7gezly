@@ -22,7 +22,7 @@ function Header(props)  {
                 <Link  to="/"> <h1>E7gezly</h1> </Link>
                 {props.appState.userData ? 
                     <div className="userBox">
-                        <img className="userAvatar" src={`https://dummyimage.com/100x100/fff/343996.png&text=+${props.appState.userData.firstName[0].toUpperCase()}+${props.appState.userData.lastName[0].toUpperCase()}+`} alt="username letters"/>
+                        <img className="userAvatar" src={`https://dummyimage.com/100x100/fff/343996.png&text=+${props.appState.userData.firstName.trim()[0].toUpperCase()}+${props.appState.userData.lastName.trim()[0].toUpperCase()}+`} alt="username letters"/>
                         <Link to="/">{props.appState.userData.firstName} {props.appState.userData.lastName}</Link>
                         <Link to="/Booking">Appoinments</Link>
                         <span className="signOut" onClick={signOut}>Sign out</span>

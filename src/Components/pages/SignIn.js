@@ -36,7 +36,12 @@ function SignIn(props) {
           History.push("/")
         })
         .catch(function(error) {
-           console.log(...error)
+            window.alert("incorrect Data")
+            console.log(error)
+            setFromInfo({
+                phoneNumber : "",
+                password : "",
+            })
         });
     }
 
