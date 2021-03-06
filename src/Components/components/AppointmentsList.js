@@ -59,8 +59,15 @@ const AppointmentsList = () => {
 
    }
 
-   const next =()=>{
+   const next =(dayTimeStamp)=>{
+    
     console.log("next")
+    Requester.post(`/bookings/nextOneInQeue/${SON.parse(window.localStorage.getItem("userData"))._id}/${dayTimeStamp}`).then(()=>{
+
+    }).catch((err)=>{
+
+    });
+
    }
 
     return (
@@ -84,7 +91,7 @@ const AppointmentsList = () => {
                        {day.appointments.length > 0 ?
                            <>
                                <h2 className="Title">Current in Queue : {day.appointments[0].currentNumberInQeue} / Queue length : {day.appointments.length}</h2> 
-                               <button className="btn1" onClick={next(day.day, )}>Next Appointment</button>
+                               <button className="btn1" onClick={next(day.day)}>Next Appointment</button>
                                <div >
                                    {day.appointments.map((booking,idx)=>{
                                        return(
