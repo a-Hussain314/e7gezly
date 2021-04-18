@@ -157,21 +157,19 @@ function Booking(props) {
     e.preventDefault();
     console.log(bookingDetails);
     // make the booking request, using the Data in "bookingDetails" state.
-    // Requester.post("/bookings/bookAppointment", bookingDetails)
-    // .then((response)=>{
-    //     console.log(response);
-
-        
-
-    //     window.alert("Booked Successfully");
-        
-    //     // set the page view to "list" , to view the appointments list 
-    //     setView("list");
-    // })
-    // .catch((error)=>{
-    //     console.log(error);
-    //     window.alert("Booking Process Failed");
-    // })
+    Requester.post("/bookings/bookAppointment", bookingDetails)
+    .then((response)=>{
+        console.log(response);
+        window.alert("Booked Successfully");
+        // set the page view to "list" , to view the appointments list 
+        setView("list");
+        setShowCalender(false)
+        setShowBookingButton(false)
+    })
+    .catch((error)=>{
+        console.log(error);
+        window.alert("Booking Process Failed");
+    })
    }
 
 
