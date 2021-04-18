@@ -48,7 +48,15 @@
               
               
         }
-
+        .SingleDatePicker {
+          display: block;
+        }
+        .SingleDatePicker_picker {
+          
+         position: relative;
+         top: 0 !important;
+         left: 0 !important;
+        }
         
 
         .appointment{

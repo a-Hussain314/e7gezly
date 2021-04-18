@@ -44,5 +44,52 @@ body{
     cursor: pointer;
   }
   
-
-
+  .CalendarDay__selected {
+    border: none;
+  }
+  
+  .CalendarDay__selected_start,
+  .CalendarDay__selected_end {
+      border-radius: 50%;
+      position: relative;
+      z-index: 0;
+    
+    &:before {
+      display: block;
+      position: absolute;
+      content: '';
+      left: 50%;
+      right: 0;
+      bottom: 0;
+      top: 0;
+      background: #66e2da;
+      z-index: -1;
+    }
+    
+    &:after {
+      display: block;
+      position: absolute;
+      content: '';
+      left: 0;
+      right: 0;
+      bottom: 0;
+      top: 0;
+      background: #00a699;
+      z-index: -1;
+      border-radius: 50%;
+    }
+  }
+  
+  .CalendarDay__selected_span {
+    border: none;
+  }
+  
+  .CalendarDay__selected_span:last-of-type {
+    border-top-right-radius: 50%;
+    border-bottom-right-radius: 50%;
+  }
+  
+  .CalendarDay__selected_span:first-of-type {
+    border-top-left-radius: 50%;
+    border-bottom-left-radius: 50%;
+  }

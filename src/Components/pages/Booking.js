@@ -3,11 +3,15 @@ import History from "../../utilities/History";
 import Requester from "../../utilities/Requester";
 import "./Booking.scss";
 import AppointmentsList from '../components/AppointmentsList';
+import { DateRangePicker, SingleDatePicker, DayPickerRangeController } from 'react-dates';
+import 'react-dates/initialize';
+import 'react-dates/lib/css/_datepicker.css';
+
 
 function Booking(props) {
 
     // "book" or "list" : to switch view between to sub-pages. [Default = "book"]
-    const[view, setView] = useState("list"); 
+    const[view, setView] = useState("book"); 
     
     // type of appointment "normal checkup & follow up" or "rediograpghy and tests"
     const[type, setType] = useState(null);  
@@ -30,6 +34,10 @@ function Booking(props) {
     // bollean flag to contro the visiability of te booking button
     const[showBookingButton, setShowBookingButton] = useState(false); 
     
+    // available calender dates 
+    const [hours, setHours] = useState(null);
+    const [calenderDates, setCalenderDates] = useState(["Wed Apr 30 2021", "Thu Apr 31 2021"]);
+    const [showCalender, setShowCalender] = useState(false);
     
     useEffect(()=>{
 
@@ -64,10 +72,6 @@ function Booking(props) {
         }
     },[])
 
-    // an array of week days to convert numberd weekDays from Api to actual days names.
-//    const weekDays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
-
-   
 
    const typeSelectHandler = (e)=>{
         console.log(e.target.value);
@@ -95,24 +99,26 @@ function Booking(props) {
         
         // loop on the filterd specialityDoctors list to extract available dates DATA, and put it in the "datesList" array.
         specialityDoctors.forEach((doctor)=>{
-            doctor.availableDays.forEach((availableDay, idx)=>{
-                
+            
                     let single_date_data = {
                         // multiply by 1000 , the time stamp entered is in second not milleseconds
-                        text : `Dr ${doctor.name} - ${new Date(availableDay*1000).toDateString()} - From ${doctor.startTime}:00 To ${doctor.endTime}:00`,
+                        // adding "+ "before time stamp to make sure its converted to number if its retrieved from api as a String. 
+                        text : `Dr ${doctor.name}`,
                         value : {
                             doctorId:doctor._id,
                             userId: props.appState.userData._id,
-                            bookingDay:availableDay,
+                            availableDays:doctor.availableDays,
+                            bookingDay:null,
                             specializationId:doctor.specializationId,
-                            bookingType: type
+                            bookingType: type,
+                            startTime :doctor.startTime,
+                            endTime :doctor.endTime,
                         }
                         
                     }
 
                     datesList.push(single_date_data)
                 
-            })
         })
 
         console.log(`available doctors appoinments : `)
@@ -125,37 +131,61 @@ function Booking(props) {
    }
 
    const doctorSelectHandler = (e)=>{
-        console.log(JSON.parse(e.target.value));
-
+       let doctor = JSON.parse(e.target.value);
+        console.log(doctor);
+        setHours([doctor.startTime, doctor.endTime]);
+        let daysList = [];
+        doctor.availableDays.forEach((day)=>{
+            daysList.push(new Date(+day).toDateString())
+        })
+        setCalenderDates(daysList)
         // set the selected date Data to "BookingDetails" state ,
         // to use it later in make the booking request when the user clicks on the Book Appointment
-        setBookingDetails(JSON.parse(e.target.value));
+        setBookingDetails({
+            doctorId:doctor.doctorId,
+            userId: props.appState.userData._id,
+            bookingDay:null,
+            specializationId:doctor.specializationId,
+            bookingType: type,
+        });
         
-        // make the Book Appointment visiable.
-        setShowBookingButton(true);
+        setShowCalender(true)
+        
    }
 
    const formSumbitHandler = (e)=>{
     e.preventDefault();
-
+    console.log(bookingDetails);
     // make the booking request, using the Data in "bookingDetails" state.
-    Requester.post("/bookings/bookAppointment", bookingDetails)
-    .then((response)=>{
-        console.log(response);
+    // Requester.post("/bookings/bookAppointment", bookingDetails)
+    // .then((response)=>{
+    //     console.log(response);
 
         
 
-        window.alert("Booked Successfully");
+    //     window.alert("Booked Successfully");
         
-        // set the page view to "list" , to view the appointments list 
-        setView("list");
-    })
-    .catch((error)=>{
-        console.log(error);
-        window.alert("Booking Process Failed");
-    })
+    //     // set the page view to "list" , to view the appointments list 
+    //     setView("list");
+    // })
+    // .catch((error)=>{
+    //     console.log(error);
+    //     window.alert("Booking Process Failed");
+    // })
    }
 
+
+   const isBlocked = (day) => {
+        // console.log(new Date(day._d).toDateString());
+        return !calenderDates.find((date)=>date===new Date(day._d).toDateString())
+    }
+
+    const isHighlighted = (day) => {
+        // console.log(new Date(day._d).toDateString());
+        return new Date(day._d).toDateString() === new Date(bookingDetails.bookingDay).toDateString();
+    }
+
+    
   
     return (
         
@@ -183,7 +213,8 @@ function Booking(props) {
                         <div className="rightTable">
 
                             {view==="book" && 
-                            <form onSubmit={formSumbitHandler}>
+                            <>
+                            <form id="form" onSubmit={formSumbitHandler}>
 
                                 <label htmlFor="type" >{"Select Appointment Type"}</label>
                                 <select id="type" onChange={typeSelectHandler}>
@@ -202,7 +233,6 @@ function Booking(props) {
                                         )
                                     })}
                                 </select>
-
                                 <label htmlFor="doctor" >{"Select Doctor & Day"}</label>
                                 <select id="doctor" onChange={doctorSelectHandler}>
                                 <option  defaultValue value=""> -- select an option -- </option>
@@ -213,12 +243,36 @@ function Booking(props) {
                             
                                     })}
                                 </select>
-                                
-                                {showBookingButton &&<button className="btn1">Book Appointment</button>}
-
                             </form>
+                    
+                            {showCalender&&<SingleDatePicker
+                                date={null} // momentPropTypes.momentObj or null
+                                onDateChange={date => {
+                                    setBookingDetails({
+                                        ...bookingDetails,
+                                        bookingDay : new Date(date).getTime()
+                                    });
+                                    // make the Book Appointment visiable.
+                                    setShowBookingButton(true);
+                                }} // PropTypes.func.isRequired
+                                focused={true} // PropTypes.bool
+                                onFocusChange={({ focused }) => {console.log(focused);}} // PropTypes.func.isRequired
+                                id="your_unique_id" // PropTypes.string.isRequired,
+                                isDayBlocked={isBlocked}
+                                isDayHighlighted={isHighlighted}
+                            />
                             }
+                            {}
+                            {showBookingButton && <>
+                                <p>The doctor will be available from {hours[0]}:00 to {hours[1]}:00 at this day.</p>
+                                <button type="submit" form="form" value="Submit" className="btn1">Book Appointment</button>
+                            </>
+                            }
+                            
+                            </>
 
+                            }
+                           
                             {view==="list" && <AppointmentsList/>}
                             
                         </div>
