@@ -70,22 +70,22 @@ function SignUp(props) {
                     <form onSubmit={formSubmitHandler}>
                         <h1>Sign Up</h1>
 
-                        <label htmlFor="firstName">Phone Number</label>
+                        <label htmlFor="firstName">First Name</label>
                         <input id="firstName"   type="text"     required onChange={updateFormInfo} value={formInfo.firstName} placeholder=""/>
                         
-                        <label htmlFor="lastName">Phone Number</label>
+                        <label htmlFor="lastName">Last Name</label>
                         <input id="lastName"    type="text"     required onChange={updateFormInfo} value={formInfo.lastName} placeholder=""/>
                         
                         <label htmlFor="phoneNumber">Phone Number</label>
                         <input id="phoneNumber" type="phone"    required onChange={updateFormInfo} value={formInfo.phoneNumber} placeholder=""/>
                         
-                        <label htmlFor="password">Phone Number</label>
+                        <label htmlFor="password">password</label>
                         <input id="password"    type="password" required onChange={updateFormInfo} value={formInfo.password}    placeholder=""/>
                         
-                        <label htmlFor="nationalID">Phone Number</label>
+                        <label htmlFor="nationalID">national ID</label>
                         <input id="nationalID"  type="id"       required onChange={updateFormInfo} value={formInfo.nationalID} placeholder=""/>
                         
-                        <label htmlFor="email">Phone Number</label>
+                        <label htmlFor="email">email</label>
                         <input id="email"       type="email"    required onChange={updateFormInfo} value={formInfo.email} placeholder=""/>
                         
                         <button id="submit"      type="submit"   className="btn1">Sign Up</button>
