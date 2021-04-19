@@ -46,7 +46,7 @@ function Home(props) {
                         <h3>Latest News</h3>
                         {news.map((topic, index)=>{
                             return(
-                            <div key={index}>
+                            <div className={"newBox"} key={index}>
                                 <h4>{topic.title}</h4>
                                 <p>{topic.content}</p>    
                             </div>)
@@ -56,10 +56,10 @@ function Home(props) {
 
                 {!!advices.length && <section className="covid">
                     <div className="container">    
-                        <h3>Covid-19 advices : </h3>
+                        <h3>Covid-19 advices</h3>
                         {advices.map((advice, index)=>{
                             return(
-                            <div key={index}>
+                            <div key={index} className="tipBox">
                                 <h4>{advice.title}</h4>
                                 <p>{advice.content}</p>    
                             </div>)
