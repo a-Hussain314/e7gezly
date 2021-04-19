@@ -79,13 +79,13 @@ function SignUp(props) {
                         <label htmlFor="phoneNumber">Phone Number</label>
                         <input id="phoneNumber" type="phone"    required onChange={updateFormInfo} value={formInfo.phoneNumber} placeholder=""/>
                         
-                        <label htmlFor="password">password</label>
+                        <label htmlFor="password">Password</label>
                         <input id="password"    type="password" required onChange={updateFormInfo} value={formInfo.password}    placeholder=""/>
                         
-                        <label htmlFor="nationalID">national ID</label>
+                        <label htmlFor="nationalID">National ID</label>
                         <input id="nationalID"  type="id"       required onChange={updateFormInfo} value={formInfo.nationalID} placeholder=""/>
                         
-                        <label htmlFor="email">email</label>
+                        <label htmlFor="email">Email</label>
                         <input id="email"       type="email"    required onChange={updateFormInfo} value={formInfo.email} placeholder=""/>
                         
                         <button id="submit"      type="submit"   className="btn1">Sign Up</button>
