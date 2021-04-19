@@ -28,7 +28,7 @@ const AppointmentsList = () => {
             }
     
             
-    }, [])
+    }, [bookings.length])
 
     const fetchUserBookings = () => {
         if(JSON.parse(window.localStorage.getItem("userData")).type==="user"){

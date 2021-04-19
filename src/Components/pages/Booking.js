@@ -3,7 +3,7 @@ import History from "../../utilities/History";
 import Requester from "../../utilities/Requester";
 import "./Booking.scss";
 import AppointmentsList from '../components/AppointmentsList';
-import { DateRangePicker, SingleDatePicker, DayPickerRangeController } from 'react-dates';
+import { SingleDatePicker } from 'react-dates';
 import 'react-dates/initialize';
 import 'react-dates/lib/css/_datepicker.css';
 
