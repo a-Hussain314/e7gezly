@@ -7,23 +7,41 @@
     flex-direction: column;
 
     form{
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        flex-direction: column;
-
+      width: 275px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      padding: 30px;      
+      margin: 25px auto;
+      box-shadow: 0 0px 20px 0px #eae8e8;
+        h1{
+          font-weight: 200;
+          color: $primary;
+          margin-top: 0;
+        }
+        label{
+          align-self: flex-start;
+          color : $primary
+        }
         input, select {
             width: 100%;
-            padding: 12px 20px;
-            margin: 2px 0;
+            padding: 12px 5px;
+            margin: 0 0 20px 0;
             display: inline-block;
             border: 1px solid $grey;
-            background-color: $offWhite;
-            border-radius: 4px;
             box-sizing: border-box;
+            &:focus{
+              outline: none;
+              background-color: $offWhite;
+            }
           }
           button{
-            width: 100%;
+            width: 66%;
+            border-radius: 0px;
+            font-weight: unset;
+            font-size: 18px;
+            font-family: Tajawal,sans-serif;
           }
           
     }

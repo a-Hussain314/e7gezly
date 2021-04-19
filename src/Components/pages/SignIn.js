@@ -51,8 +51,11 @@ function SignIn(props) {
             <div className="container">
                 <div className="SignUp_page">
                     <form onSubmit={formSubmitHandler}>
-                        <input id="phoneNumber" type="phone"    required onChange={updateFormInfo} value={formInfo.phoneNumber} placeholder="Phone Number"/>
-                        <input id="password"    type="password" required onChange={updateFormInfo} value={formInfo.password}    placeholder="Password"/>
+                        <h1>Login</h1>
+                        <label htmlFor="phone">Phone Number</label>
+                        <input id="phone" type="phone" required onChange={updateFormInfo} value={formInfo.phoneNumber} placeholder=""/>
+                        <label htmlFor="password">Password</label>
+                        <input id="password"    type="password" required onChange={updateFormInfo} value={formInfo.password}    placeholder=""/>
                         <button id="submit"      type="submit"   className="btn1">Sign in</button>
                     </form>
                     <div>

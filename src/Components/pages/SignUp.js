@@ -68,12 +68,26 @@ function SignUp(props) {
             <div className="container">
                 <div className="SignUp_page">
                     <form onSubmit={formSubmitHandler}>
-                        <input id="firstName"   type="text"     required onChange={updateFormInfo} value={formInfo.firstName} placeholder="First Name"/>
-                        <input id="lastName"    type="text"     required onChange={updateFormInfo} value={formInfo.lastName} placeholder="Last Name"/>
-                        <input id="phoneNumber" type="phone"    required onChange={updateFormInfo} value={formInfo.phoneNumber} placeholder="Phone Number"/>
-                        <input id="password"    type="password" required onChange={updateFormInfo} value={formInfo.password}    placeholder="Password"/>
-                        <input id="nationalID"  type="id"       required onChange={updateFormInfo} value={formInfo.nationalID} placeholder="National Id"/>
-                        <input id="email"       type="email"    required onChange={updateFormInfo} value={formInfo.email} placeholder="Email Address"/>
+                        <h1>Sign Up</h1>
+
+                        <label htmlFor="firstName">Phone Number</label>
+                        <input id="firstName"   type="text"     required onChange={updateFormInfo} value={formInfo.firstName} placeholder=""/>
+                        
+                        <label htmlFor="lastName">Phone Number</label>
+                        <input id="lastName"    type="text"     required onChange={updateFormInfo} value={formInfo.lastName} placeholder=""/>
+                        
+                        <label htmlFor="phoneNumber">Phone Number</label>
+                        <input id="phoneNumber" type="phone"    required onChange={updateFormInfo} value={formInfo.phoneNumber} placeholder=""/>
+                        
+                        <label htmlFor="password">Phone Number</label>
+                        <input id="password"    type="password" required onChange={updateFormInfo} value={formInfo.password}    placeholder=""/>
+                        
+                        <label htmlFor="nationalID">Phone Number</label>
+                        <input id="nationalID"  type="id"       required onChange={updateFormInfo} value={formInfo.nationalID} placeholder=""/>
+                        
+                        <label htmlFor="email">Phone Number</label>
+                        <input id="email"       type="email"    required onChange={updateFormInfo} value={formInfo.email} placeholder=""/>
+                        
                         <button id="submit"      type="submit"   className="btn1">Sign Up</button>
                     </form>
                     <div>
