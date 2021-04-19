@@ -10,7 +10,7 @@ const DoctorAppointmentCard = ({booking}) => {
                     {/* <li>{`Dr : ${booking.doctorData.name}`}</li> */}
                     {/* <li>{`Dr Email : ${booking.doctorData.email}`}</li> */}
                     <li>{`Specialization : ${booking.doctorData.specilizationName}`}</li>
-                    <li>{`Day and time  : ${new Date(booking.bookingDay*1000).toDateString()} - from ${booking.doctorData.startTime}:00 To ${booking.doctorData.endTime}:00`} </li>
+                    <li>{`Day and time  : ${new Date(booking.bookingDay).toDateString()} - from ${booking.doctorData.startTime}:00 To ${booking.doctorData.endTime}:00`} </li>
                     {/* <li>{`Queue length : ${booking.totalNumberInQeue}`}</li> */}
                     <li>{`Number in Queue : ${booking.numberInQeue}`}</li>
                     {/* <li>{`Current in Queue : ${booking.currentNumberInQeue}`}</li> */}

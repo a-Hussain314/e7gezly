@@ -243,7 +243,7 @@ function Booking(props) {
                                 </select>
                             </form>
                     
-                            {showCalender&&<SingleDatePicker
+                            {showCalender && <SingleDatePicker
                                 date={null} // momentPropTypes.momentObj or null
                                 onDateChange={date => {
                                     setBookingDetails({

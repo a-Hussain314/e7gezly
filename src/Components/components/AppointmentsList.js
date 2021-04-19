@@ -86,7 +86,7 @@ const AppointmentsList = () => {
                bookings.map((day, index)=>{
                   return(
                   <div key={index}>
-                       <h2 className="Title">{new Date(day.day * 1000).toDateString()} Appointments : </h2>
+                       <h2 className="Title">{new Date(day.day).toDateString()} Appointments : </h2>
                        
                        {day.appointments.length > 0 ?
                            <>
