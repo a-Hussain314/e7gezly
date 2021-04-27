@@ -17,8 +17,8 @@ const AppointmentsList = () => {
 
             // to ensure the interval gets setted at the first mount only, when the bookins 
             // is still = [] & also checks if the current user is "user" not "doctor"
-            if(bookings.length===0 && JSON.parse(window.localStorage.getItem("userData")).type==="user"){  
-                console.log("request will be made every 30 seconds");
+            if(true){  
+              console.log("request will be made every 30 seconds");
               realTime= setInterval(fetchUserBookings, 3000)
             }
     
@@ -72,6 +72,7 @@ const AppointmentsList = () => {
 
     return (
         <>
+        <h1>Your Appointments</h1>
         {bookings.length > 0 ?  
            JSON.parse(window.localStorage.getItem("userData")).type==="user" ?
 
@@ -83,7 +84,7 @@ const AppointmentsList = () => {
                
                :
            
-               bookings.map((day, index)=>{
+               bookings.sort((a,b)=>{return a.day - b.day }).map((day, index)=>{
                   return(
                   <div key={index}>
                        <h2 className="Title">{new Date(+day.day).toDateString()} Appointments : </h2>

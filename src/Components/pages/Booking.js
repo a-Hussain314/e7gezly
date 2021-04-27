@@ -1,7 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import History from "../../utilities/History";
 import Requester from "../../utilities/Requester";
+import AddDoctorsForm from "../components/Admin/AddDoctorsForm";
+import AllDoctors from '../components/Admin/AllDoctors';
+import AllBookings from '../components/Admin/AllBookings';
+import HomeContent from '../components/Admin/HomeContent';
 import AppointmentsList from '../components/AppointmentsList';
+import AddDaysForm from '../components/AddDaysForm';
 import "./Booking.scss";
 
 // custom date pikcer
@@ -13,7 +18,7 @@ import 'react-dates/lib/css/_datepicker.css';
 function Booking(props) {
 
     // "book" or "list" : to switch view between to sub-pages. [Default = "book"]
-    const [view, setView] = useState("book");
+    const [view, setView] = useState(null);
 
     // type of appointment "normal checkup & follow up" or "rediograpghy and tests"
     const [type, setType] = useState(null);
@@ -37,14 +42,17 @@ function Booking(props) {
     const [showBookingButton, setShowBookingButton] = useState(false);
 
     // available calender dates 
-    const [hours, setHours] = useState(null);
     const [calenderDates, setCalenderDates] = useState(["Wed Apr 30 2021", "Thu Apr 31 2021"]);
+
+    const [hours, setHours] = useState(null);
     const [showCalender, setShowCalender] = useState(false);
+
+    const userData = JSON.parse(window.localStorage.getItem("userData"));
 
     useEffect(() => {
 
         // to make sure that users with accounts only can see this page
-        if (!window.localStorage.getItem("userData")) {
+        if (!userData) {
             History.push("/")
         }
         else {
@@ -176,7 +184,7 @@ function Booking(props) {
 
 
     const isBlocked = (day) => {
-        // console.log(new Date(day._d).toDateString());
+        console.log(day._d, new Date(day._d).toDateString());
         return !calenderDates.find((date) => date === new Date(day._d).toDateString())
     }
 
@@ -193,9 +201,15 @@ function Booking(props) {
             <section className="Booking">
                 <div className="container">
 
-                    {JSON.parse(window.localStorage.getItem("userData")).type === "doctor" &&
+                    {userData.type === "doctor" &&
                         <h2 className="Title">
-                            Dr {JSON.parse(window.localStorage.getItem("userData")).firstName} Appointments Page
+                            Dr {userData.firstName} Appointments Page
+                        </h2>
+                    }
+
+                    {userData.type === "admin" &&
+                        <h2 className="Title">
+                           Admin Panel
                         </h2>
                     }
 
@@ -203,10 +217,13 @@ function Booking(props) {
 
                         <div className="leftTable">
                             <ul>
-                                {JSON.parse(window.localStorage.getItem("userData")).type === "user" &&
-                                    <li onClick={() => { setView("book") }}>Book Appointment</li>
-                                }
-                                <li onClick={() => { setView("list") }}>My Appointments</li>
+                                {userData.type === "admin" && <li onClick={() => { setView("addDoctorsForm") }}>Add Doctors</li>}
+                                {userData.type === "admin" && <li onClick={() => { setView("allDoctors") }}>All Doctors</li>}
+                                {userData.type === "admin" && <li onClick={() => { setView("allBookings") }}>All Bookings</li>}
+                                {userData.type === "admin" && <li onClick={() => { setView("homeContent") }}>Home Content</li>}
+                                {userData.type !== "admin" && <li onClick={() => { setView("list") }}>My Appointments</li>}
+                                {userData.type === "user" && <li onClick={() => { setView("book") }}>Book Appointment</li>}
+                                {userData.type === "doctor" && <li onClick={() => { setView("addDaysForm") }}>ِAvailable Days</li>}
                             </ul>
                         </div>
 
@@ -214,6 +231,7 @@ function Booking(props) {
 
                             {view === "book" &&
                                 <>
+                                    <h1>Book An Appointment</h1>
                                     <form id="form" onSubmit={formSumbitHandler}>
 
                                         <label htmlFor="type" >{"Select Appointment Type"}</label>
@@ -248,6 +266,7 @@ function Booking(props) {
                                     {showCalender && <SingleDatePicker
                                         date={null} // momentPropTypes.momentObj or null
                                         onDateChange={date => {
+                                            console.log(date)
                                             setBookingDetails({
                                                 ...bookingDetails,
                                                 bookingDay: new Date(date).getTime()
@@ -264,16 +283,20 @@ function Booking(props) {
                                     }
 
                                     {showBookingButton && <>
-                                        <p>The doctor will be available from {hours[0]}:00 to {hours[1]}:00 at this day.</p>
+                                        <p>The doctor will be available from {hours[0]} to {hours[1]} at this day.</p>
                                         <button type="submit" form="form" value="Submit" className="btn1">Book Appointment</button>
                                     </>
                                     }
 
                                 </>
-
                             }
 
                             {view === "list" && <AppointmentsList />}
+                            {view === "addDaysForm" && <AddDaysForm />}
+                            {view === "addDoctorsForm" && <AddDoctorsForm />}
+                            {view === "allDoctors" && <AllDoctors />}
+                            {view === "allBookings" && <AllBookings />}
+                            {view === "homeContent" && <HomeContent />}
 
                         </div>
                     </div>
