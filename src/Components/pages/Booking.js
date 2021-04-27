@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import History from "../../utilities/History";
 import Requester from "../../utilities/Requester";
-import "./Booking.scss";
 import AppointmentsList from '../components/AppointmentsList';
+import "./Booking.scss";
+
+// custom date pikcer
 import { SingleDatePicker } from 'react-dates';
 import 'react-dates/initialize';
 import 'react-dates/lib/css/_datepicker.css';
