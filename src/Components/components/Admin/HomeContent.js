@@ -94,10 +94,10 @@ function HomeContent() {
                 <h1>Add News</h1>
 
                 <label htmlFor="title">title</label>
-                <input id="title" type="text" required onChange={updateAdviceInfo} value={newInfo.title} placeholder="" />
+                <input id="title" type="text" required onChange={updateNewInfo} value={newInfo.title} placeholder="" />
 
                 <label htmlFor="content">content</label>
-                <input id="content" type="text" required onChange={updateAdviceInfo} value={newInfo.content} placeholder="" />
+                <input id="content" type="text" required onChange={updateNewInfo} value={newInfo.content} placeholder="" />
 
                 <button id="submit" type="submit" className="btn1">Add</button>
             </form>
