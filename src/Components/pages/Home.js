@@ -57,7 +57,7 @@ function Home(props) {
                 <Carousel
                     swipeable
                     draggable
-                    showDots
+                    showDots={false}
                     responsive={responsive}
                     // means to render carousel on server-side.
                     infinite={true}
