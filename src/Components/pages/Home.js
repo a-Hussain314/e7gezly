@@ -62,7 +62,7 @@ function Home(props) {
                     // means to render carousel on server-side.
                     infinite={true}
                     autoPlay
-                    autoPlaySpeed={500000}
+                    autoPlaySpeed={3000}
                     keyBoardControl={true}
                     containerClass="carousel__container"
                     renderDotsOutside
