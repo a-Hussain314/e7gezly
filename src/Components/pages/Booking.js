@@ -3,6 +3,7 @@ import History from "../../utilities/History";
 import Requester from "../../utilities/Requester";
 import AddDoctorsForm from "../components/Admin/AddDoctorsForm";
 import AllDoctors from '../components/Admin/AllDoctors';
+import Specializations from '../components/Admin/Specializations'
 import AllBookings from '../components/Admin/AllBookings';
 import HomeContent from '../components/Admin/HomeContent';
 import AppointmentsList from '../components/AppointmentsList';
@@ -219,6 +220,7 @@ function Booking(props) {
                             <ul>
                                 {userData.type === "admin" && <li onClick={() => { setView("addDoctorsForm") }}>Add Doctors</li>}
                                 {userData.type === "admin" && <li onClick={() => { setView("allDoctors") }}>All Doctors</li>}
+                                {userData.type === "admin" && <li onClick={() => { setView("specializations") }}>specializations</li>}
                                 {userData.type === "admin" && <li onClick={() => { setView("allBookings") }}>All Bookings</li>}
                                 {userData.type === "admin" && <li onClick={() => { setView("homeContent") }}>Home Content</li>}
                                 {userData.type !== "admin" && <li onClick={() => { setView("list") }}>My Appointments</li>}
@@ -295,6 +297,7 @@ function Booking(props) {
                             {view === "addDaysForm" && <AddDaysForm />}
                             {view === "addDoctorsForm" && <AddDoctorsForm />}
                             {view === "allDoctors" && <AllDoctors />}
+                            {view === "specializations" && <Specializations />}
                             {view === "allBookings" && <AllBookings />}
                             {view === "homeContent" && <HomeContent />}
 
